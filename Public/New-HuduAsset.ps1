@@ -7,7 +7,9 @@ function New-HuduAsset {
 		[Parameter(Mandatory=$true)]
 		[Int]$asset_layout_id='',
 		[Parameter(Mandatory=$true)]
-		[Array]$fields=''
+		[Array]$fields='',
+		[Parameter(Mandatory=$false)]
+		[String]$serial =''
 	)
 	
 
@@ -16,6 +18,9 @@ function New-HuduAsset {
 	$asset.asset.add('name',$name)
 	$asset.asset.add('asset_layout_id',$asset_layout_id)
 	$asset.asset.add('custom_fields',$fields)
+	if($serial){
+		$asset.asset.add('primary_serial', $serial)
+	}
 	
 	$json = $asset | convertto-json -Depth 10
 	
